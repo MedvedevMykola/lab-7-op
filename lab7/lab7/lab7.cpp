@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <conio.h>
 #include <string.h>
 const int n = 500;
@@ -13,14 +14,26 @@ void input(char *s, char *e)
 }
 int num(char*s, char*e)
 {
-	int k = 0;
+	int k = 0; char m[1];
 	char *delimiter = " .,?!:;\/(){}[]";
 	char *str;
 	str = strtok(s, delimiter);
+	char s1[n] = {0};
 	while (str != NULL)
 	{
-		if ( strrstr(str, e) == str)k++;
+		int t = k;
+		m[0] =str[strlen(str)-1];
+		if (strpbrk(m,e)!=0)k++;
+		if (k == t) {
+			strcat(s1, str);
+			strcat(s1, " ");
+		}
+
+		str = strtok(NULL, delimiter);
 	}
+	printf("\n");
+	puts(s1);
+	printf("\n");
 	return k;
 }
 int main()
